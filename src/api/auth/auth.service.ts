@@ -1,16 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { StorageService } from '@app/storage';
+import { InjectRepository, Repository } from '@app/orm';
+import { User } from '@app/entities';
 import { DoLoginDto, DoSignUpDto } from './dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private storage: StorageService) {}
+  constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
 
-  doLogin(dto: DoLoginDto) {
-    // this.userRepo.find()
+  async doLogin(dto: DoLoginDto): Promise<User> {
+    const user = await this.userRepo.findOne(dto);
+    if (!user) {
+      throw new Error('Wrong username/password pair');
+    }
+    return user;
   }
 
-  doSignUp(dto: DoSignUpDto) {
-    // this.userRepo.save()
+  async doSignUp(dto: DoSignUpDto): Promise<User> {
+    const user = await this.userRepo.findOne({
+      username: dto.username,
+    });
+    if (user) {
+      throw new Error('The user already existed');
+    }
+    await this.userRepo.save(dto);
+    return user;
   }
 }
