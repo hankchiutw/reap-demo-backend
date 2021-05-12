@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
+import { ErrorMessageInterceptor } from './core';
 import { ApiModule } from './api';
 import { OrmModule } from './orm';
 
@@ -13,6 +15,11 @@ import { OrmModule } from './orm';
     ApiModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ErrorMessageInterceptor,
+    },
+  ],
 })
 export class AppModule {}
