@@ -7,12 +7,12 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('login')
-  async doLogin(@Body() dto: DoLoginDto): Promise<void> {
-    await this.authService.doLogin(dto);
+  doLogin(@Body() dto: DoLoginDto): Promise<boolean> {
+    return this.authService.doLogin(dto);
   }
 
   @Post('signup')
-  async doSignUp(@Body() dto: DoSignUpDto): Promise<void> {
-    await this.authService.doSignUp(dto);
+  doSignUp(@Body() dto: DoSignUpDto): Promise<boolean> {
+    return this.authService.doSignUp(dto);
   }
 }
