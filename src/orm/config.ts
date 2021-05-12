@@ -2,7 +2,7 @@ import { ConfigService } from '@nestjs/config';
 import { ConnectionOptions } from 'typeorm';
 import { User } from '@app/entities';
 
-export const configFactory = (
+export const rootConfigFactory = (
   configService: ConfigService,
 ): ConnectionOptions => ({
   type: 'sqlite',
@@ -11,3 +11,10 @@ export const configFactory = (
   logging: true,
   synchronize: true,
 });
+
+export const testConfig: ConnectionOptions = {
+  type: 'sqlite',
+  database: ':memory:',
+  entities: [User],
+  synchronize: true,
+};
