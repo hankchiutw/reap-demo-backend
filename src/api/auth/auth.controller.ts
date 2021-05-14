@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Session } from '@nestjs/common';
+import { Controller, Get, Post, Body, Session, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { DoLoginDto, DoSignUpDto } from './dto';
 
@@ -24,5 +25,11 @@ export class AuthController {
   @Post('signup')
   doSignUp(@Body() dto: DoSignUpDto): Promise<boolean> {
     return this.authService.doSignUp(dto);
+  }
+
+  @Get('logout')
+  doLogout(@Req() req: Request) {
+    req.session.destroy(null);
+    return true;
   }
 }
