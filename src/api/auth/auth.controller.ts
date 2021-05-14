@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Session } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { DoLoginDto, DoSignUpDto } from './dto';
 
@@ -6,9 +6,19 @@ import { DoLoginDto, DoSignUpDto } from './dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Get('me')
+  getMe(@Session() session: Record<string, any>) {
+    const username = session.username;
+    return username ? { username } : false;
+  }
+
   @Post('login')
-  doLogin(@Body() dto: DoLoginDto): Promise<boolean> {
-    return this.authService.doLogin(dto);
+  async doLogin(
+    @Body() dto: DoLoginDto,
+    @Session() session: Record<string, any>,
+  ): Promise<boolean> {
+    session.username = await this.authService.doLogin(dto);
+    return true;
   }
 
   @Post('signup')

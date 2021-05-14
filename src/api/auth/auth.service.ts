@@ -7,12 +7,12 @@ import { DoLoginDto, DoSignUpDto } from './dto';
 export class AuthService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
 
-  async doLogin(dto: DoLoginDto): Promise<boolean> {
+  async doLogin(dto: DoLoginDto): Promise<string> {
     const user = await this.userRepo.findOne(dto);
     if (!user) {
       throw new Error('Wrong username/password pair');
     }
-    return true;
+    return user.username;
   }
 
   async doSignUp(dto: DoSignUpDto): Promise<boolean> {

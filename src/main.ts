@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import * as session from 'express-session';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -10,9 +11,15 @@ async function bootstrap() {
   });
   const configService = app.get(ConfigService);
   const port = configService.get('API_PORT');
-  if (!port) {
-    throw new Error('Please set API_PORT in .env');
-  }
+
+  app.use(
+    session({
+      secret: 'reap-demo',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
+
   await app.listen(port);
 }
 bootstrap();
