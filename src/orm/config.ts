@@ -1,20 +1,19 @@
 import { ConfigService } from '@nestjs/config';
-import { ConnectionOptions } from 'typeorm';
-import { User } from '@app/entities';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const rootConfigFactory = (
   configService: ConfigService,
-): ConnectionOptions => ({
+): TypeOrmModuleOptions => ({
   type: 'sqlite',
   database: configService.get('SQLITE_DB'),
-  entities: [User],
+  autoLoadEntities: true,
   logging: true,
   synchronize: true,
 });
 
-export const testConfig: ConnectionOptions = {
+export const testConfig: TypeOrmModuleOptions = {
   type: 'sqlite',
   database: ':memory:',
-  entities: [User],
+  autoLoadEntities: true,
   synchronize: true,
 };

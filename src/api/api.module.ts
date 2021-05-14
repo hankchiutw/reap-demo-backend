@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { OrmModule } from '@app/orm';
-import { User } from '@app/entities';
 import { StorageModule } from '@app/storage';
 import { AuthController, AuthService } from './auth';
+import { PhotoController, PhotoService } from './photo';
 
 @Module({
-  imports: [StorageModule, OrmModule.forFeature([User])],
-  controllers: [AuthController],
-  providers: [AuthService],
+  imports: [StorageModule, OrmModule.forFeature()],
+  controllers: [AuthController, PhotoController],
+  providers: [AuthService, PhotoService],
 })
 export class ApiModule {}
