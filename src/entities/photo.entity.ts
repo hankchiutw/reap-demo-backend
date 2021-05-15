@@ -16,12 +16,12 @@ export class Photo {
   originalname: string;
 
   @Column()
-  fullpath: string;
+  path: string;
 
   @Column()
   size: number;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @ManyToOne(() => User, (user) => user.photos)

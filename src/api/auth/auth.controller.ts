@@ -9,7 +9,7 @@ export class AuthController {
 
   @Get('me')
   getMe(@Session() session: Record<string, any>) {
-    const username = session.username;
+    const username = session.user?.username;
     return username ? { username } : false;
   }
 
@@ -18,7 +18,7 @@ export class AuthController {
     @Body() dto: DoLoginDto,
     @Session() session: Record<string, any>,
   ): Promise<boolean> {
-    session.username = await this.authService.doLogin(dto);
+    session.user = await this.authService.doLogin(dto);
     return true;
   }
 
