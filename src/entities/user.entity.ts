@@ -12,6 +12,6 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Photo, (photo) => photo.user)
+  @OneToMany(() => Photo, (photo) => photo.user, { eager: true })
   photos: Photo[];
 }

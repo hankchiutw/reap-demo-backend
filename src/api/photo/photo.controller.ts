@@ -1,28 +1,34 @@
 import {
   Controller,
+  Get,
   Post,
   Body,
   UseInterceptors,
   UploadedFile,
-  Session,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Photo } from '@app/entities';
 import { PhotoService } from './photo.service';
+import { PhotoResourceInterceptor } from './photo-resource.interceptor';
 
 @Controller('photo')
 export class PhotoController {
   constructor(private photoService: PhotoService) {}
+
+  @Get()
+  @UseInterceptors(PhotoResourceInterceptor)
+  findAll(): Promise<Photo[]> {
+    return this.photoService.findAll();
+  }
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
     @Body('description') description: string,
-    @Session() session: Record<string, any>,
-  ) {
+  ): Promise<true> {
     const { originalname, path, size } = file;
     const dto = {
-      userId: session.user.id,
       originalname,
       path,
       size,

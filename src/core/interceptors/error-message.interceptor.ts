@@ -9,7 +9,8 @@ import { catchError, map } from 'rxjs/operators';
 import { ApiResult } from '../interfaces';
 
 @Injectable()
-export class ErrorMessageInterceptor implements NestInterceptor {
+export class ErrorMessageInterceptor<T>
+  implements NestInterceptor<T, ApiResult> {
   intercept(
     _context: ExecutionContext,
     next: CallHandler,
