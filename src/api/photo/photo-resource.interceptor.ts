@@ -17,22 +17,28 @@ interface PhotoResource {
 
 @Injectable()
 export class PhotoResourceInterceptor<T>
-  implements NestInterceptor<T, PhotoResource[]> {
+  implements NestInterceptor<T, PhotoResource | PhotoResource[]> {
   intercept(
     _context: ExecutionContext,
     next: CallHandler,
-  ): Observable<PhotoResource[]> {
+  ): Observable<PhotoResource | PhotoResource[]> {
     return next.handle().pipe(
-      map((photos: Photo[]) => {
-        return photos.map(({ description, createdAt, id, user }) => {
-          return {
-            description,
-            createdAt,
-            id,
-            username: user.username,
-          };
-        });
+      map((photos: Photo | Photo[]) => {
+        if (Array.isArray(photos)) {
+          return photos.map(transform);
+        }
+        return transform(photos);
       }),
     );
   }
+}
+
+function transform(photo: Photo): PhotoResource {
+  const { description, createdAt, id, user } = photo;
+  return {
+    description,
+    createdAt,
+    id,
+    username: user.username,
+  };
 }

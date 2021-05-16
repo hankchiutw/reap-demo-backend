@@ -31,10 +31,11 @@ export class PhotoController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(PhotoResourceInterceptor)
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
     @Body('description') description: string,
-  ): Promise<true> {
+  ): Promise<Photo> {
     const { originalname, path, size } = file;
     const dto = {
       originalname,
@@ -43,7 +44,6 @@ export class PhotoController {
       description,
     };
 
-    await this.photoService.create(dto);
-    return true;
+    return await this.photoService.create(dto);
   }
 }

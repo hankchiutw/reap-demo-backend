@@ -17,12 +17,11 @@ export class PhotoService {
     @Inject(REQUEST) private req: Request,
   ) {}
 
-  async create(dto: CreatePhotoDto): Promise<boolean> {
-    await this.photoRepo.save({
+  async create(dto: CreatePhotoDto): Promise<Photo> {
+    return await this.photoRepo.save({
       ...dto,
       user: this.user,
     });
-    return true;
   }
 
   async findByUser(userId: number): Promise<Photo[]> {
