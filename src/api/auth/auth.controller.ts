@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Session, Req } from '@nestjs/common';
 import { Request } from 'express';
+import { User } from '@app/entities';
 import { AuthService } from './auth.service';
 import { DoLoginDto, DoSignUpDto } from './dto';
 
@@ -8,9 +9,13 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Get('me')
-  getMe(@Session() session: Record<string, any>) {
-    const username = session.user?.username;
-    return username ? { username } : false;
+  getMe(@Session() session: Record<string, any>): Partial<User> {
+    if (!session.user) {
+      return null;
+    }
+    const user = { ...session.user };
+    delete user.password;
+    return user;
   }
 
   @Post('login')
