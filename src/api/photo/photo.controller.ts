@@ -3,6 +3,9 @@ import {
   Get,
   Post,
   Body,
+  Param,
+  Query,
+  Session,
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
@@ -17,8 +20,13 @@ export class PhotoController {
 
   @Get()
   @UseInterceptors(PhotoResourceInterceptor)
-  findAll(): Promise<Photo[]> {
-    return this.photoService.findAll();
+  findAll(
+    @Query('userId') userId: number,
+    @Session() session: Record<string, any>,
+  ): Promise<Photo[]> {
+    return this.photoService.findByUser(
+      userId === undefined ? session.user.id : userId,
+    );
   }
 
   @Post('upload')

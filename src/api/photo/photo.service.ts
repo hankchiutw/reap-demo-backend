@@ -25,10 +25,13 @@ export class PhotoService {
     return true;
   }
 
-  async findAll(): Promise<Photo[]> {
-    const user = await this.userRepo.findOne({
-      id: (this.req.session as Record<string, any>).user.id,
+  async findByUser(userId: number): Promise<Photo[]> {
+    const photos = await this.photoRepo.find({
+      relations: ['user'],
+      where: {
+        user: userId,
+      },
     });
-    return user.photos;
+    return photos;
   }
 }

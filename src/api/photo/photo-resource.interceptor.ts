@@ -19,18 +19,17 @@ interface PhotoResource {
 export class PhotoResourceInterceptor<T>
   implements NestInterceptor<T, PhotoResource[]> {
   intercept(
-    context: ExecutionContext,
+    _context: ExecutionContext,
     next: CallHandler,
   ): Observable<PhotoResource[]> {
     return next.handle().pipe(
       map((photos: Photo[]) => {
-        const session = context.switchToHttp().getRequest().session;
-        return photos.map(({ description, createdAt, id }) => {
+        return photos.map(({ description, createdAt, id, user }) => {
           return {
             description,
             createdAt,
             id,
-            username: session.user.username,
+            username: user.username,
           };
         });
       }),
