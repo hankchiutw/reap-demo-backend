@@ -11,6 +11,7 @@ import { Photo } from '@app/entities';
 interface PhotoResource {
   id: number;
   description: string;
+  staticPath: string;
   username: string;
   createdAt: Date;
 }
@@ -37,6 +38,7 @@ function transform(photo: Photo): PhotoResource {
   const { description, createdAt, id, user } = photo;
   return {
     description,
+    staticPath: `photo/${id}/static`,
     createdAt,
     id,
     username: user.username,

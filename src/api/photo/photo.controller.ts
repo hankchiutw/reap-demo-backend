@@ -6,9 +6,11 @@ import {
   Param,
   Query,
   Session,
+  Res,
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Photo } from '@app/entities';
 import { PhotoService } from './photo.service';
@@ -27,6 +29,13 @@ export class PhotoController {
     return this.photoService.findByUser(
       userId === undefined ? session.user.id : userId,
     );
+  }
+
+  @Get(':photoId/static')
+  async sendFile(@Param('photoId') photoId: number, @Res() res: Response) {
+    const path = await this.photoService.findPath(photoId);
+
+    res.sendFile(path);
   }
 
   @Post('upload')

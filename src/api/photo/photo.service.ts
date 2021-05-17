@@ -33,4 +33,15 @@ export class PhotoService {
     });
     return photos;
   }
+
+  async findPath(photoId: number): Promise<string> {
+    const { path } = await this.photoRepo.findOne({
+      select: ['path'],
+      where: {
+        id: photoId,
+      },
+    });
+
+    return path;
+  }
 }
