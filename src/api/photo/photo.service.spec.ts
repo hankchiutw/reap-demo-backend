@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { AppTestingModule } from '@app/app-testing.module';
+import { ApiTestingModule } from '@app/api/api-testing.module';
 import { PhotoService } from './photo.service';
 
 describe('PhotoService', () => {
@@ -6,10 +8,10 @@ describe('PhotoService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [PhotoService],
+      imports: [AppTestingModule, ApiTestingModule],
     }).compile();
 
-    service = module.get<PhotoService>(PhotoService);
+    service = await module.resolve<PhotoService>(PhotoService);
   });
 
   it('should be defined', () => {

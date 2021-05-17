@@ -13,7 +13,6 @@ export class PhotoService {
 
   constructor(
     @InjectRepository(Photo) private photoRepo: Repository<Photo>,
-    @InjectRepository(User) private userRepo: Repository<User>,
     @Inject(REQUEST) private req: Request,
   ) {}
 
