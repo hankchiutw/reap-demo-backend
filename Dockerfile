@@ -10,6 +10,9 @@ COPY package*.json ./
 RUN yarn install --only=production
 
 COPY . ./
+RUN yarn build
+
+COPY .env.prod ./dist/.env
 
 EXPOSE 3000
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "start:prod" ]
