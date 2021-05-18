@@ -1,0 +1,34 @@
+<div class="title">Instapic</div>
+<ng-container
+  *ngTemplateOutlet="
+    contextRef;
+    context: { selectedUserId: selectedUserId$ | async }
+  "
+>
+</ng-container>
+
+<ng-template #contextRef let-selectedUserId="selectedUserId">
+  <div class="items-container">
+    <div
+      class="row"
+      (click)="selectUser(myId)"
+      [ngClass]="{ selected: selectedUserId === myId }"
+    >
+      My photos
+    </div>
+    <div class="users-container">
+      <div class="section-title">Explore</div>
+      <div
+        class="row"
+        [ngClass]="{ selected: selectedUserId === user.id }"
+        *ngFor="let user of otherUsers$ | async"
+        (click)="selectUser(user.id)"
+      >
+        {{ user.username }}
+      </div>
+    </div>
+    <div class="row" (click)="logout()">
+      <mat-icon>logout</mat-icon>&nbsp; Logout
+    </div>
+  </div>
+</ng-template>

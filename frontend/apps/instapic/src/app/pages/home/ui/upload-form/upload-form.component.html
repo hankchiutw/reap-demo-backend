@@ -1,0 +1,16 @@
+<label class="row file-anchor" for="upload-input"> {{ fileAnchorLabel }}</label>
+<input
+  class="row description-input"
+  type="text"
+  [(ngModel)]="description"
+  placeholder="Description"
+/>
+<div class="row submit-button" (click)="upload()" mat-dialog-close>Upload</div>
+
+<input
+  type="file"
+  id="upload-input"
+  accept="image/png, image/jpeg"
+  (change)="file = $event.target.files[0]"
+  style="display: none"
+/>

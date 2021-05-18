@@ -1,0 +1,22 @@
+<div class="title">Instapic</div>
+<div class="form" [formGroup]="formGroup" (keydown.enter)="submit()">
+  <div class="row">
+    <input type="text" placeholder="User name" formControlName="username" />
+  </div>
+  <div class="row">
+    <input type="password" placeholder="Password" formControlName="password" />
+  </div>
+
+  <div class="error-message">{{ errorMessage$ | async }}</div>
+  <div class="row submit-button" (click)="submit()">
+    {{ useSignUp ? 'Sign Up' : 'Login' }}
+  </div>
+  <div class="row hint" *ngIf="!useSignUp">
+    <span>No Account?&nbsp;</span>
+    <span (click)="useSignUp = true; reset()" class="anchor">Sign Up</span>
+  </div>
+  <div class="row hint" *ngIf="useSignUp">
+    <span>Already Have An Account?&nbsp;</span>
+    <span (click)="useSignUp = false; reset()" class="anchor">Login</span>
+  </div>
+</div>

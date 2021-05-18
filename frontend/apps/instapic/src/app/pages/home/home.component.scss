@@ -1,0 +1,11 @@
+:host {
+  background: rgba(229, 229, 229, 0.5);
+  height: 100%;
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 60px auto;
+}
+
+app-sidebar {
+  grid-row: span 2;
+}

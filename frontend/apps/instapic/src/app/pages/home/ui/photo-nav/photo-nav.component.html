@@ -1,0 +1,15 @@
+<div class="photo-container" *ngFor="let photo of photos$ | async">
+  <div class="img-container">
+    <img src="{{ apiUrl }}/{{ photo.staticPath }}" width="300" height="200" />
+  </div>
+  <div class="primary-info">
+    {{ photo.description }}
+  </div>
+  <div class="secondary-info">
+    <mat-icon>person_outline</mat-icon>&nbsp;{{
+      photo.username
+    }}&nbsp;&nbsp;<mat-icon>schedule</mat-icon>&nbsp;{{
+      photo.createdAt | date: 'MM/dd hh:mm'
+    }}
+  </div>
+</div>

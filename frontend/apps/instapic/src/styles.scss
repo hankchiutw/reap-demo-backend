@@ -1,0 +1,19 @@
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@font-face {
+  font-family: 'Billabong';
+  src: url('assets/font.ttf');
+}

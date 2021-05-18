@@ -1,0 +1,15 @@
+<span class="anchor">
+  <input
+    type="checkbox"
+    [checked]="newestFirst"
+    (change)="setNewestFirst($event.target.checked)"
+  />
+  Newest first</span
+>
+
+<span class="anchor upload-anchor" (click)="openUploadForm()">
+  <mat-icon>add_photo_alternate</mat-icon>
+</span>
+<span class="anchor">
+  <mat-icon>account_circle</mat-icon> {{ me?.username }}</span
+>

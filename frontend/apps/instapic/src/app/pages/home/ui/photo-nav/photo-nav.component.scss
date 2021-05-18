@@ -1,0 +1,48 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.photo-container {
+  max-width: 200px;
+  margin: 12px;
+}
+
+.img-container {
+  width: 200px;
+  height: 120px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+img {
+  object-fit: cover;
+}
+
+.primary-info {
+  font-size: 14px;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 8px;
+}
+
+.secondary-info {
+  color: #878787;
+  font-size: 12px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+  }
+}
