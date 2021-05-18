@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
+  app.setGlobalPrefix(configService.get('API_PREFIX'));
   const port = configService.get('API_PORT');
 
   const sessionConfig = {
