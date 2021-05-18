@@ -14,7 +14,7 @@ import { OrmModule } from './orm';
       isGlobal: true,
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'frontent/dist/apps/instapic'),
+      rootPath: join(__dirname, '..', 'frontend/dist/apps/instapic'),
     }),
     OrmModule.forRoot(),
     ApiModule,

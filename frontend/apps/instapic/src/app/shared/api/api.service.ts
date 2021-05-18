@@ -30,7 +30,6 @@ export class ApiService {
       params,
       headers,
       reportProgress,
-      withCredentials: true,
     };
     if (reportProgress) {
       Object.assign(requestOptions, {
