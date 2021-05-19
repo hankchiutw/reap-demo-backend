@@ -1,15 +1,15 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { getConnectionOptions } from 'typeorm';
 
-export const rootConfigFactory = (
+export const rootConfigFactory = async (
   configService: ConfigService,
-): TypeOrmModuleOptions => ({
-  type: 'sqlite',
-  database: configService.get('SQLITE_DB'),
-  autoLoadEntities: true,
-  logging: true,
-  synchronize: configService.get('NODE_ENV') !== 'production',
-});
+): Promise<TypeOrmModuleOptions> =>
+  Object.assign(await getConnectionOptions(), {
+    entities: [],
+    autoLoadEntities: true,
+    synchronize: configService.get('NODE_ENV') !== 'production',
+  });
 
 export const testConfig: TypeOrmModuleOptions = {
   type: 'sqlite',
