@@ -2,7 +2,9 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   coverageReporters: ['text', 'text-summary', 'html-spa'],
+  coverageDirectory: '../coverage',
+  rootDir: 'src',
   moduleNameMapper: {
-    '@app/(.*)': '<rootDir>/src/$1',
+    '@app/(.*)': '<rootDir>/$1',
   },
 };
