@@ -13,7 +13,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "docker:build": "docker build -t reap-demo .",
+    "docker:build": "docker build --force-rm -t reap-demo .",
     "docker:rm": "docker kill reap-demo && docker rm reap-demo",
     "docker:run": "docker run -itd --restart=always --name reap-demo -p 3000:3000 -v `pwd`/src:/app/src reap-demo",
     "docker:rerun": "yarn docker:rm && yarn docker:run",
