@@ -1,11 +1,13 @@
-# reap-demo-backend
+# reap-demo-fullstack
 
-Simple API service using NestJS.
+Mock photo sharing service using NestJS and Angular.
 
 ## How to run
 
 ```bash
 yarn install
+yarn --cwd frontend install
+yarn --cwd frontend build
 yarn start
 ```
 
@@ -16,20 +18,17 @@ yarn docker:build
 yarn docker:run
 ```
 
-And the base URL is http://localhost:3000
-
+And use browser to open http://localhost:3000
 
 ## Test
 
 ```bash
-# unit tests
 yarn test
-
-# e2e tests
-yarn test:e2e
+yarn --cwd frontend test
 ```
 
 ## What have been done
+#### backend
 - API endpoints
   - GET /auth/me
   - POST /auth/login
@@ -43,3 +42,12 @@ yarn test:e2e
 - Modular and ready to add more APIs
 - Unit tests and e2e tests
 - Can deploy using Dockerfile
+
+#### frontend
+- Lazy load pages with Angular Router
+- Login/Sign up
+- Upload files
+- Browse files from other users
+- Sort files by creating time
+- Modular and ready to add more features
+- Unit tests
