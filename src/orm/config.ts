@@ -8,7 +8,7 @@ export const rootConfigFactory = (
   database: configService.get('SQLITE_DB'),
   autoLoadEntities: true,
   logging: true,
-  synchronize: true,
+  synchronize: configService.get('NODE_ENV') !== 'production',
 });
 
 export const testConfig: TypeOrmModuleOptions = {
