@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { Connection } from 'typeorm';
 import { join } from 'path';
 import { ErrorMessageInterceptor } from './core';
 import { ApiModule } from './api';
@@ -27,4 +28,8 @@ import { OrmModule } from './orm';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection) {
+    this.connection.synchronize();
+  }
+}
