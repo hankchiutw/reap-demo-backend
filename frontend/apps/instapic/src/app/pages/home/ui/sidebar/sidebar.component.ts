@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  OnInit,
+} from '@angular/core';
 import { AuthStatus, User } from '@app/entities';
 import { Observable } from 'rxjs';
 import { HomeContext } from '../../entities';
@@ -15,8 +21,20 @@ export class SidebarComponent implements OnInit {
   otherUsers$: Observable<User[]>;
   selectedUserId$ = this.context.selectedUserId$;
 
+  isOff = true;
+
   get myId() {
     return this.authStatus.user?.id;
+  }
+
+  @HostBinding('class')
+  get offClass() {
+    return this.isOff ? 'off' : '';
+  }
+
+  @HostListener('click')
+  turnOff() {
+    this.isOff = true;
   }
 
   constructor(

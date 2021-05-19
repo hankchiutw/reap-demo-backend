@@ -1,9 +1,50 @@
 :host {
+  height: 100%;
+  transition: background 0.6s;
+
+  @media (max-width: 767px) {
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    &.off {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
+}
+
+.menu-anchor {
+  cursor: pointer;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  color: #878787;
+  height: 60px;
+  margin-left: 18px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.content-container {
   background: #f8f8f8;
   border-radius: 0 24px 24px 0;
   padding: 10px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 200px;
+  position: relative;
+  left: 0;
+  transition: left 0.6s;
+
+  @media (max-width: 767px) {
+    position: fixed;
+    :host.off & {
+      left: -200px;
+    }
+  }
 }
 
 .title {
