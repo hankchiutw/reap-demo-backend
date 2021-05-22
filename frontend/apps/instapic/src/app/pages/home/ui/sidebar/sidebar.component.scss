@@ -70,20 +70,22 @@
   }
 }
 
+.section-title {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px;
+  color: #505050;
+  margin-bottom: 4px;
+}
+
 .items-container {
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: hidden;
 }
 
 .users-container {
   flex: 1;
-
-  .section-title {
-    font-size: 14px;
-    font-weight: bold;
-    padding: 4px;
-    color: #505050;
-    margin-bottom: 4px;
-  }
+  overflow-y: auto;
 }
