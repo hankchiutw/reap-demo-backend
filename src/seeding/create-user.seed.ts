@@ -13,6 +13,6 @@ export class CreateUser implements Seeder {
       password: 'guest',
     });
 
-    await userFactory(null, { userCount: 2 });
+    await userFactory({}, { userCount: 20 });
   }
 }
