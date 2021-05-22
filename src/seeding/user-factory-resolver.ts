@@ -6,7 +6,6 @@ import { Factory } from 'typeorm-seeding';
 
 const PHOTO_COUNT_MIN_DEFAULT = 5;
 const PHOTO_COUNT_MAX_DEFAULT = 30;
-const PHOTO_URL = 'http://picsum.photos/200/150';
 const DEBOUNCE_DURATION = 1000;
 
 interface UserFactoryOptions {
@@ -24,7 +23,7 @@ export const userFactoryResolver = (factory: Factory) => async (
     photoCountMin: min = PHOTO_COUNT_MIN_DEFAULT,
     photoCountMax: max = PHOTO_COUNT_MAX_DEFAULT,
   } = options;
-  const photoCount = faker.random.number({ min, max });
+  const photoCount = faker.datatype.number({ min, max });
 
   console.log('creating photos:', photoCount);
   const photos = await factory(Photo)().createMany(photoCount);
@@ -41,7 +40,8 @@ export const userFactoryResolver = (factory: Factory) => async (
 };
 
 async function genImage(filePath: string): Promise<{ size: number }> {
-  const res = await fetch(PHOTO_URL);
+  const url = (faker.image as any).lorempicsum.image(200, 150);
+  const res = await fetch(url);
 
   const stream = fs.createWriteStream(filePath);
 
