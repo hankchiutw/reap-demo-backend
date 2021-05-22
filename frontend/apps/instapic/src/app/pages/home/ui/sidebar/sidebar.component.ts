@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
-  HostListener,
   OnInit,
 } from '@angular/core';
 import { AuthStatus, User } from '@app/entities';
@@ -30,11 +29,6 @@ export class SidebarComponent implements OnInit {
   @HostBinding('class')
   get offClass() {
     return this.isOff ? 'off' : '';
-  }
-
-  @HostListener('click')
-  turnOff() {
-    this.isOff = true;
   }
 
   constructor(
